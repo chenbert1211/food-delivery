@@ -1,7 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {createResturant} from '../store/resturant'
 
 class addResturant extends React.Component {
   constructor(props) {
@@ -27,14 +27,13 @@ class addResturant extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.updateUser({...this.state})
+    this.props.createResturant({...this.state})
   }
 
   componentDidMount() {}
 
   render() {
-    const {firstName, lastName, imageUrl, phoneNumber, email} = this.state
-    console.log(this.state)
+    const {name, description, img, address, state, city, zip} = this.state
     return (
       <div>
         <div>
@@ -43,12 +42,11 @@ class addResturant extends React.Component {
               <h1>Resturant Information</h1>
               <div>
                 <label>
-                  First Name
+                  Business Name
                   <input
-                    placeholder="First Name"
                     onChange={this.handleChange}
-                    name="firstName"
-                    value={firstName}
+                    name="name"
+                    value={name}
                   />
                 </label>
               </div>
@@ -56,12 +54,12 @@ class addResturant extends React.Component {
 
               <div>
                 <label>
-                  Last Name
+                  Description
                   <input
                     placeholder="Last Name"
                     onChange={this.handleChange}
-                    name="lastName"
-                    value={lastName}
+                    name="description"
+                    value={description}
                   />
                 </label>
               </div>
@@ -70,12 +68,12 @@ class addResturant extends React.Component {
 
               <div>
                 <label>
-                  Image
+                  Business Image
                   <input
                     placeholder="Profile Picture"
                     onChange={this.handleChange}
-                    name="imageUrl"
-                    value={imageUrl}
+                    name="img"
+                    value={img}
                   />
                 </label>
               </div>
@@ -84,12 +82,12 @@ class addResturant extends React.Component {
 
               <div>
                 <label>
-                  Cell Number
+                  Address
                   <input
                     placeholder="Cell Number"
                     onChange={this.handleChange}
-                    name="phoneNumber"
-                    value={phoneNumber}
+                    name="address"
+                    value={address}
                   />
                 </label>
               </div>
@@ -97,16 +95,43 @@ class addResturant extends React.Component {
 
               <div>
                 <label>
-                  Email
+                  State
                   <input
-                    placeholder="Email"
+                    placeholder="Cell Number"
                     onChange={this.handleChange}
-                    name="email"
-                    value={email}
+                    name="state"
+                    value={state}
                   />
                 </label>
               </div>
               <br />
+
+              <div>
+                <label>
+                  City
+                  <input
+                    placeholder="Cell Number"
+                    onChange={this.handleChange}
+                    name="city"
+                    value={city}
+                  />
+                </label>
+              </div>
+              <br />
+
+              <div>
+                <label>
+                  Zipcode
+                  <input
+                    placeholder="Cell Number"
+                    onChange={this.handleChange}
+                    name="zip"
+                    value={zip}
+                  />
+                </label>
+              </div>
+              <br />
+
               <div>
                 <input type="submit" />
               </div>
@@ -130,7 +155,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  // updateUser: (auth) => dispatch(updateUser(auth)),
+  createResturant: rec => dispatch(createResturant(rec))
 })
 
 export default connect(mapState, mapDispatch)(addResturant)

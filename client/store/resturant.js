@@ -2,10 +2,10 @@ import axios from 'axios'
 import history from '../history'
 
 const GET_RESTURANT = 'GET_RESTURANT'
-const ADD_RESTURANT = 'ADD_RESTURANT'
+const CREATE_RESTURANT = 'CREATE_RESTURANT'
 
 const _getResturant = resturant => ({type: GET_RESTURANT, resturant})
-const _addResturant = () => ({type: ADD_RESTURANT})
+const _createResturant = resturant => ({type: CREATE_RESTURANT, resturant})
 
 export const getResturant = () => {
   return async dispatch => {
@@ -15,12 +15,19 @@ export const getResturant = () => {
   }
 }
 
+export const createResturant = rec => {
+  return async dispatch => {
+    const {data} = await axios.post(`/api/resturant`, rec)
+    dispatch(_createResturant(data))
+  }
+}
+
 export default function(state = {resturant: []}, action) {
   switch (action.type) {
     case GET_RESTURANT:
       return action.resturant
-    case ADD_RESTURANT:
-      return defaultUser
+    case CREATE_RESTURANT:
+      return action.resturant
     default:
       return state
   }

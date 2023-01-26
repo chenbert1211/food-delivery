@@ -12,3 +12,13 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    console.log(req.body)
+    const newResturant = await Resturant.create(req.body)
+    res.status(201).send(newResturant)
+  } catch (err) {
+    next(err)
+  }
+})

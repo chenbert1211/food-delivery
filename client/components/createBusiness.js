@@ -1,15 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {steve} from '../store/businessAcc'
 
 /**
  * COMPONENT
  */
-const AuthForm = props => {
+const CreateBusiness = props => {
   const {name, displayName, handleSubmit, error} = props
   return (
     <div>
+      <h1> THIS IS THE CREAT BUSEINES</h1>
+
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
@@ -17,6 +19,7 @@ const AuthForm = props => {
           </label>
           <input name="email" type="text" />
         </div>
+
         <div>
           <label htmlFor="password">
             <small>Password</small>
@@ -63,18 +66,18 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(steve(email, password, formName))
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const BusinessLogin = connect(mapLogin, mapDispatch)(CreateBusiness)
+export const BusinessSignup = connect(mapSignup, mapDispatch)(CreateBusiness)
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
+CreateBusiness.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,

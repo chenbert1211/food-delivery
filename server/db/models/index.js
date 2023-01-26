@@ -4,7 +4,9 @@ const Category = require('./category')
 const Dish = require('./dish')
 const Header = require('./header')
 const AddOns = require('./addOns')
+const BusinessAcc = require('./businessAcc')
 
+const BusinessRest = BusinessAcc.hasMany(Resturant)
 const restCat = Resturant.hasMany(Category)
 const catDis = Category.hasMany(Dish)
 const disHea = Dish.hasMany(Header)
@@ -23,6 +25,8 @@ const deaOns = Header.hasMany(AddOns)
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
+  BusinessRest,
+  BusinessAcc,
   restCat,
   catDis,
   disHea,

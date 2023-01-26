@@ -4,7 +4,6 @@ const db = require('../db')
 const Resturant = db.define('resturant', {
   name: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false
   },
 
