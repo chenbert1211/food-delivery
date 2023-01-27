@@ -13,9 +13,31 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    let id = req.params.id
+    const resturant = await Resturant.findAll({where: {businessAccId: id}})
+    res.json(resturant)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/single/:id', async (req, res, next) => {
+  try {
+    let id = req.params.id
+    const resturant = await Resturant.findOne({
+      where: {id: id},
+      include: [{association: restCat}]
+    })
+    res.json(resturant)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body)
     const newResturant = await Resturant.create(req.body)
     res.status(201).send(newResturant)
   } catch (err) {

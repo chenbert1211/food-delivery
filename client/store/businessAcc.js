@@ -21,7 +21,7 @@ const removeUser = () => ({type: REMOVE_BUSINESS})
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+export const mee = () => async dispatch => {
   try {
     const res = await axios.get('/auth/businessme')
     dispatch(getUser(res.data || defaultUser))
@@ -30,10 +30,10 @@ export const me = () => async dispatch => {
   }
 }
 
-export const steve = (email, password) => async dispatch => {
+export const steve = (email, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/businesssignup`, {email, password})
+    res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }

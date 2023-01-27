@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {steve} from '../store/businessAcc'
+import {steve} from '../../store/businessAcc'
 
 /**
  * COMPONENT
@@ -45,7 +45,7 @@ const CreateBusiness = props => {
  */
 const mapLogin = state => {
   return {
-    name: 'login',
+    name: 'businesslogin',
     displayName: 'Login',
     error: state.user.error
   }
@@ -53,7 +53,7 @@ const mapLogin = state => {
 
 const mapSignup = state => {
   return {
-    name: 'signup',
+    name: 'businesssignup',
     displayName: 'Sign Up',
     error: state.user.error
   }

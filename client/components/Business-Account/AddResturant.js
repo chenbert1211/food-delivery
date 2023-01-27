@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {createResturant} from '../store/resturant'
+import {createResturant} from '../../store/resturant'
 
 class addResturant extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      businessAccId: this.props.id,
       name: null,
       description: null,
       img: null,
@@ -150,6 +151,7 @@ class addResturant extends React.Component {
 
 const mapState = state => {
   return {
+    id: state.business.id,
     resturant: state.resturant
   }
 }

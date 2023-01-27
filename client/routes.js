@@ -10,9 +10,11 @@ import {
   addResturant,
   Resturant,
   BusinessLogin,
-  BusinessSignup
+  BusinessSignup,
+  EditResturant
 } from './components'
 import {me} from './store'
+import {mee} from './store/businessAcc'
 
 /**
  * COMPONENT
@@ -30,7 +32,6 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/addResturant" component={addResturant} />
         <Route path="/resturant" component={Resturant} />
         <Route path="/businessSignup" component={BusinessSignup} />
         <Route path="/businessLogin" component={BusinessLogin} />
@@ -43,6 +44,8 @@ class Routes extends Component {
         {isBusiness && (
           <Switch>
             <Route path="/myResturant" component={MyResturant} />
+            <Route path="/addResturant" component={addResturant} />
+            <Route path="/edit-resturant/:id" component={EditResturant} />
           </Switch>
         )}
 
@@ -69,6 +72,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(mee())
     }
   }
 }
