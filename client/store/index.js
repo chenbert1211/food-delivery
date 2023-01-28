@@ -5,8 +5,10 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import business from './businessAcc'
 import resturant from './resturant'
+import category from './category'
+import dish from './dish'
 
-const reducer = combineReducers({user, resturant, business})
+const reducer = combineReducers({user, resturant, business, category, dish})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
