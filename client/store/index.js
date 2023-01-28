@@ -7,8 +7,18 @@ import business from './businessAcc'
 import resturant from './resturant'
 import category from './category'
 import dish from './dish'
+import addOns from './addOns'
+import header from './header'
 
-const reducer = combineReducers({user, resturant, business, category, dish})
+const reducer = combineReducers({
+  user,
+  resturant,
+  business,
+  category,
+  dish,
+  addOns,
+  header
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

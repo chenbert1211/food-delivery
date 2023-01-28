@@ -24,7 +24,7 @@ export const createDish = rec => {
   }
 }
 
-export default function(state = {category: {}}, action) {
+export default function(state = {dish: {}}, action) {
   switch (action.type) {
     case GET_SINGLE_DISH:
       return action.resturant

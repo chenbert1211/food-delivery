@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createCategory} from '../../store/category'
+import {createHeader} from '../../store/header'
 
-class AddCat extends React.Component {
+class AddHeader extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,11 +20,8 @@ class AddCat extends React.Component {
   }
 
   handleSubmit() {
-    this.props.createCategory({
-      resturantId: this.props.resturantId,
-      name: this.state.name
-    })
-    this.props.AddToCat({name: this.state.name})
+    this.props.createHeader({dishId: this.props.dishId, name: this.state.name})
+    // this.props.AddToCat({name: this.state.name})
   }
 
   async componentDidMount() {}
@@ -40,7 +37,7 @@ class AddCat extends React.Component {
         </div>
 
         <div>
-          <button onClick={this.handleSubmit}>Add DISH</button>
+          <button onClick={this.handleSubmit}>Add A HEADERER</button>
         </div>
       </div>
     )
@@ -52,7 +49,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  createCategory: rec => dispatch(createCategory(rec))
+  createHeader: rec => dispatch(createHeader(rec))
 })
 
-export default connect(mapState, mapDispatch)(AddCat)
+export default connect(mapState, mapDispatch)(AddHeader)
