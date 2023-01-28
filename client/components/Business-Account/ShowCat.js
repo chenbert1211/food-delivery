@@ -27,6 +27,8 @@ class ShowCat extends React.Component {
   addDish() {
     this.setState({
       addDish: true,
+      addHeader: false,
+      addAddOns: false,
       catId: event.target.value
     })
   }
@@ -34,6 +36,8 @@ class ShowCat extends React.Component {
   addHeader() {
     this.setState({
       addHeader: true,
+      addAddOns: false,
+      addDish: false,
       dishId: event.target.value
     })
   }
@@ -41,6 +45,8 @@ class ShowCat extends React.Component {
   addAddOns() {
     this.setState({
       addAddOns: true,
+      addHeader: false,
+      addDish: false,
       headerId: event.target.value
     })
   }

@@ -46,7 +46,7 @@ export const steve = (email, password, method) => async dispatch => {
   }
 }
 
-export const logout = () => async dispatch => {
+export const logoutt = () => async dispatch => {
   try {
     await axios.post('/auth/businesslogout')
     dispatch(removeUser())

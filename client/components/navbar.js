@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {logoutt} from '../store/businessAcc'
+import Button from '@mui/material/Button'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, isBusiness}) => (
   <div>
-    <h1>BOILERMAKER</h1>
-    <nav>
-      {isLoggedIn ? (
+    <nav className="NavBar">
+      <img id="logo" src="/Logo.png" />
+      {isLoggedIn || isBusiness ? (
         <div>
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
@@ -17,10 +19,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </a>
         </div>
       ) : (
-        <div>
+        <div className="NavBar">
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">
+            <Button>Sign In</Button>
+          </Link>
+          <Link to="/signup">
+            <Button>Create Account</Button>
+          </Link>
         </div>
       )}
     </nav>
@@ -33,7 +39,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isBusiness: !!state.business.id
   }
 }
 
@@ -41,6 +48,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(logoutt())
     }
   }
 }
