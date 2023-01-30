@@ -65,8 +65,8 @@ class ShowCat extends React.Component {
     return (
       <div>
         {this.props.categories.map(a => (
-          <div>
-            <h2>{a.name}</h2>
+          <div className="category">
+            <h2 className="categoryHeader">{a.name}</h2>
             <button onClick={this.addDish} value={a.id}>
               Add Dish
             </button>

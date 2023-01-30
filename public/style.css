@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -38,4 +39,35 @@ form div {
 .myResturant {
   display: flex;
   justify-content: space-between;
+}
+
+.setting-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.myResturantStack {
+  background-color: aqua;
+  right: 0;
+  height: 100%;
+  width: 90%;
+  margin-left: 20%;
+  position: relative;
+}
+
+.myResturantImg {
+  width: 100%;
+  height: 150px;
+}
+
+.ResturantName {
+  font-size: 40px;
+}
+
+.category {
+  margin: 30px;
+}
+
+.categoryHeader {
+  background: lightgray;
 }

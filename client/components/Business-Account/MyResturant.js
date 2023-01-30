@@ -44,7 +44,7 @@ class MyResturant extends React.Component {
             <Button>Add Resturant</Button>
           </Link>
         </div>
-        <div>
+        <div className="myResturantStack">
           <Stack
             direction="column"
             justifyContent="center"

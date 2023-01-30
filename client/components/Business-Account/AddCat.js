@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createCategory} from '../../store/category'
+import {createCategory, getSingleCategory} from '../../store/category'
 
 class AddCat extends React.Component {
   constructor(props) {
@@ -19,12 +19,14 @@ class AddCat extends React.Component {
     })
   }
 
-  handleSubmit() {
-    this.props.createCategory({
+  async handleSubmit() {
+    await this.props.createCategory({
       resturantId: this.props.resturantId,
       name: this.state.name
     })
-    this.props.AddToCat({name: this.state.name})
+    // await this.props.getSingleCategory(this.props.newCat.id)
+    this.props.AddToCat()
+    this.props.closeForm()
   }
 
   async componentDidMount() {}
@@ -40,7 +42,7 @@ class AddCat extends React.Component {
         </div>
 
         <div>
-          <button onClick={this.handleSubmit}>Add DISH</button>
+          <button onClick={this.handleSubmit}>Add Header</button>
         </div>
       </div>
     )
@@ -48,11 +50,14 @@ class AddCat extends React.Component {
 }
 
 const mapState = state => {
-  return {}
+  return {
+    newCat: state.category
+  }
 }
 
 const mapDispatch = dispatch => ({
-  createCategory: rec => dispatch(createCategory(rec))
+  createCategory: rec => dispatch(createCategory(rec)),
+  getSingleCategory: id => dispatch(getSingleCategory(id))
 })
 
 export default connect(mapState, mapDispatch)(AddCat)

@@ -5,34 +5,80 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {logoutt} from '../store/businessAcc'
 import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import MyResturant from './Business-Account/MyResturant'
 
-const Navbar = ({handleClick, isLoggedIn, isBusiness}) => (
-  <div>
-    <nav className="NavBar">
-      <img id="logo" src="/Logo.png" />
-      {isLoggedIn || isBusiness ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div className="NavBar">
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">
-            <Button>Sign In</Button>
-          </Link>
-          <Link to="/signup">
-            <Button>Create Account</Button>
-          </Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
+const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchor, setAnchor] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const open1 = Boolean(anchor)
+  const Click = event => {
+    setAnchorEl(event.currentTarget)
+  }
+  const Click1 = event => {
+    setAnchor(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+    setAnchor(null)
+  }
+  return (
+    <div>
+      <nav className="NavBar">
+        <img id="logo" src="/Logo.png" />
+        {isLoggedIn ? (
+          <div>
+            <Link to="/home">Home</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : isBusiness ? (
+          <div>
+            <Button
+              id="basic"
+              aria-controls={open1 ? 'setting' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open1 ? 'true' : undefined}
+              onClick={Click1}
+            >
+              <img
+                className="setting-icon"
+                src="https://icon-library.com/images/three-line-menu-icon/three-line-menu-icon-6.jpg"
+              />{' '}
+            </Button>
+            <Menu
+              id="basic"
+              anchorEl={anchor}
+              open={open1}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic'
+              }}
+            >
+              <Link to="/myResturant">
+                <MenuItem onClick={MyResturant}>My Resturant</MenuItem>
+              </Link>
+              <MenuItem onClick={(handleClose, handleClick)}>Logout</MenuItem>
+            </Menu>
+          </div>
+        ) : (
+          <div className="NavBar">
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login">
+              <Button>Sign In</Button>
+            </Link>
+            <Link to="/signup">
+              <Button>Create Account</Button>
+            </Link>
+          </div>
+        )}
+      </nav>
+    </div>
+  )
+}
 
 /**
  * CONTAINER
