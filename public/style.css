@@ -34,3 +34,8 @@ form div {
   margin-left: 10px;
   margin-top: 8px;
 }
+
+.myResturant {
+  display: flex;
+  justify-content: space-between;
+}
