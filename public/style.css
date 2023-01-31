@@ -71,3 +71,17 @@ form div {
 .categoryHeader {
   background: lightgray;
 }
+
+.dishBox {
+  background-color: aquamarine;
+  margin: 10px;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.dishes {
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  background-color: aqua;
+}

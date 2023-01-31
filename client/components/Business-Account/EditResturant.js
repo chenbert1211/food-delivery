@@ -116,29 +116,31 @@ class EditResturant extends React.Component {
           {resturant.zip}
         </h3>
         <Button onClick={this.addForm}>ADD CATEGORY</Button>
-        {add ? (
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={add}
-            onClose={this.closeForm}
-            closeAfterTransition
-            slots={{backdrop: Backdrop}}
-          >
-            <Fade in={add} timeout={300}>
-              <Box sx={style}>
-                <AddCat
-                  AddToCat={this.AddToCat}
-                  resturantId={this.props.resturant.id}
-                  closeForm={this.closeForm}
-                />
-              </Box>
-            </Fade>
-          </Modal>
-        ) : (
+
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={add}
+          onClose={this.closeForm}
+          closeAfterTransition
+          slots={{backdrop: Backdrop}}
+        >
+          <Fade in={add} timeout={300}>
+            <Box sx={style}>
+              <AddCat
+                AddToCat={this.AddToCat}
+                resturantId={this.props.resturant.id}
+                closeForm={this.closeForm}
+              />
+            </Box>
+          </Fade>
+        </Modal>
+
+        {loading == true ? (
           ''
+        ) : (
+          <ShowCat AddToCat={this.AddToCat} categories={resturant.categories} />
         )}
-        {loading == true ? '' : <ShowCat categories={resturant.categories} />}
       </div>
     )
   }

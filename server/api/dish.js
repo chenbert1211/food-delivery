@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Dish, disHea} = require('../db/models')
+const {Dish, disHea, deaOns} = require('../db/models')
 module.exports = router
 
 router.get('/:id', async (req, res, next) => {
@@ -7,7 +7,7 @@ router.get('/:id', async (req, res, next) => {
     let id = req.params.id
     const resturant = await Dish.findOne({
       where: {id: id},
-      include: [{association: disHea}]
+      include: [{association: disHea, include: [{association: deaOns}]}]
     })
     res.json(resturant)
   } catch (err) {

@@ -22,6 +22,7 @@ class AddDish extends React.Component {
   handleSubmit() {
     this.props.createDish({categoryId: this.props.catId, name: this.state.name})
     // this.props.AddToCat({name: this.state.name})
+    this.props.closeForm()
   }
 
   async componentDidMount() {}
