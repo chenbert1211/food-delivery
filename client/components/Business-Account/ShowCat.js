@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import {Box, styled} from '@mui/system'
 import {getSingleHeader} from '../../store/header'
 import {getSingleDish} from '../../store/dish'
+import AddIcon from '@mui/icons-material/Add'
 
 const BackdropUnstyled = React.forwardRef((props, ref) => {
   const {open, className, ...other} = props
@@ -152,22 +153,17 @@ class ShowCat extends React.Component {
         {this.props.categories.map(a => (
           <div className="category">
             <h2 className="categoryHeader">{a.name}</h2>
-            <button onClick={this.addDish} value={a.id}>
-              Add Dish
-            </button>
+            <AddIcon onClick={this.addDish} value={a.id} />
+
             <div className="dishBox">
               {a.dishes.map(b => (
                 <div id={b.id} onClick={this.addHeader} className="dishes">
-                  <h3 id={b.id}>{b.name}</h3>
-
-                  {b.headers.map(c => (
-                    <div>
-                      <h4>{c.name}</h4>
-                      <button value={c.id} onClick={this.addAddOns}>
-                        ADD ADDONSS!
-                      </button>
-                    </div>
-                  ))}
+                  <img
+                    className="dishImg"
+                    id={b.id}
+                    src="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMDFkNzMzZDE2MDA3MzJiNWFjMDIyNDljMWZhN2ExNGEvODU5YmFmZjFkNzYwNDJhNDVlMzE5ZDFkZTgwYWVjN2EuanBlZw=="
+                  />
+                  <p id={b.id}>{b.name}</p>
                 </div>
               ))}
             </div>

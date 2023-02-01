@@ -10,6 +10,7 @@ import Fade from '@mui/material/Fade'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import {Box, styled} from '@mui/system'
+import AddIcon from '@mui/icons-material/Add'
 
 const BackdropUnstyled = React.forwardRef((props, ref) => {
   const {open, className, ...other} = props

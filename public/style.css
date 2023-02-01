@@ -73,15 +73,31 @@ form div {
 }
 
 .dishBox {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   margin: 10px;
   display: flex;
   flex-flow: wrap;
+  /* justify-content: space-evenly; */
 }
 
 .dishes {
-  width: 400px;
+  width: 240px;
   height: 200px;
   margin: 10px;
-  background-color: aqua;
+  /* background-color: aqua; */
+  transition: box-shadow 0.5s;
+}
+
+.dishes:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.dishImg {
+  width: 100%;
+  height: 85%;
+}
+
+.dishes p {
+  margin-top: -6px;
+  right: 0;
 }
