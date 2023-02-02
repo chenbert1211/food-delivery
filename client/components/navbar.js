@@ -4,10 +4,24 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {logoutt} from '../store/businessAcc'
+import {styled} from '@mui/material/styles'
 import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MyResturant from './Business-Account/MyResturant'
+import Resturant from './resturant'
+import IconButton from '@mui/material/IconButton'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import Badge from '@mui/material/Badge'
+
+const StyledBadge = styled(Badge)(({theme}) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px'
+  }
+}))
 
 const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -30,10 +44,37 @@ const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
         <img id="logo" src="/Logo.png" />
         {isLoggedIn ? (
           <div>
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={4} color="secondary">
+                <ShoppingCartIcon color="action" />
+              </StyledBadge>
+            </IconButton>
+            <Button
+              id="basic"
+              aria-controls={open ? 'setting' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={Click}
+            >
+              <img
+                className="setting-icon"
+                src="https://icon-library.com/images/three-line-menu-icon/three-line-menu-icon-6.jpg"
+              />{' '}
+            </Button>
+            <Menu
+              id="basic"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic'
+              }}
+            >
+              <Link to="/resturants">
+                <MenuItem>Home</MenuItem>
+              </Link>
+              <MenuItem onClick={(handleClose, handleClick)}>Logout</MenuItem>
+            </Menu>
           </div>
         ) : isBusiness ? (
           <div>

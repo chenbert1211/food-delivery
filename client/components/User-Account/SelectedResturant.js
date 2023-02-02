@@ -7,21 +7,22 @@ class SelectedResturant extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      resturant: {}
+      resturant: {},
+      loading: false
     }
   }
 
   async componentDidMount() {
     let id = this.props.match.params.id
-    console.log(id)
     let data = await this.props.getSingleResturant(id)
     this.setState({
-      resturant: data.resturant
+      resturant: data.resturant,
+      loading: true
     })
   }
 
   render() {
-    let {resturant} = this.state
+    let {resturant, loading} = this.state
     return (
       <div className="resturantDiv">
         <div>
@@ -35,6 +36,27 @@ class SelectedResturant extends React.Component {
             {resturant.zip}
           </h3>
         </div>
+
+        {loading
+          ? resturant.categories.map(cat => (
+              <div className="category">
+                <h2 className="categoryHeader">{cat.name}</h2>
+
+                <div className="dishBox">
+                  {cat.dishes.map(b => (
+                    <div className="dishes">
+                      <img
+                        className="dishImg"
+                        id={b.id}
+                        src="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMDFkNzMzZDE2MDA3MzJiNWFjMDIyNDljMWZhN2ExNGEvODU5YmFmZjFkNzYwNDJhNDVlMzE5ZDFkZTgwYWVjN2EuanBlZw=="
+                      />
+                      <p id={b.id}>{b.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          : ''}
       </div>
     )
   }

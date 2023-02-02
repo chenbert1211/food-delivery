@@ -33,12 +33,13 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/resturant" component={Resturant} />
+        <Route path="/resturants" component={Resturant} />
+        <Route path="/resturant/:id" component={SelectedResturant} />
         <Route path="/businessSignup" component={BusinessSignup} />
         <Route path="/businessLogin" component={BusinessLogin} />
         {isLoggedIn && (
           <Switch>
-            <Route path="/home" component={UserHome} />
+            <Route path="/home" component={Resturant} />
             <Route path="/resturant/:id" component={SelectedResturant} />
           </Switch>
         )}

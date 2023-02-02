@@ -5,12 +5,19 @@ const Dish = require('./dish')
 const Header = require('./header')
 const AddOns = require('./addOns')
 const BusinessAcc = require('./businessAcc')
+const Cart = require('./cart')
+const CartItem = require('./cartItem')
 
 const BusinessRest = BusinessAcc.hasMany(Resturant)
 const restCat = Resturant.hasMany(Category)
 const catDis = Category.hasMany(Dish)
 const disHea = Dish.hasMany(Header)
 const deaOns = Header.hasMany(AddOns)
+
+Dish.belongsToMany(Cart, {through: CartItem})
+User.hasOne(Cart)
+Cart.belongsTo(User)
+Cart.belongsToMany(Dish, {through: CartItem})
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -36,5 +43,7 @@ module.exports = {
   Category,
   Dish,
   Header,
-  AddOns
+  AddOns,
+  Cart,
+  CartItem
 }
