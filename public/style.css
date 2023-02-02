@@ -101,3 +101,31 @@ form div {
   margin-top: -6px;
   right: 0;
 }
+
+.resturantDiv {
+  display: flex;
+  flex-flow: wrap;
+  margin: 10px;
+}
+
+.resturantBox {
+  width: 300px;
+  height: 200px;
+  margin: 10px;
+  /* background-color: aqua; */
+  transition: box-shadow 0.5s;
+}
+
+.resturantBox:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.resturantImg {
+  width: 100%;
+  height: 85%;
+}
+
+.resturantBox p {
+  margin-top: -6px;
+  right: 0;
+}
