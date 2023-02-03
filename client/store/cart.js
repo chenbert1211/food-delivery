@@ -19,17 +19,17 @@ export const getCart = id => {
 
 export const updateCart = rec => {
   return async dispatch => {
-    const {data} = await axios.put(`/api/cart`, rec)
+    const {data} = await axios.post(`/api/cart`, rec)
     dispatch(_UpdateCart(data))
   }
 }
 
-export default function(state = {cart: {}}, action) {
+export default function(state = {cart: {}, cartItem: []}, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
     case UPDATE_CART:
-      return action.cart
+      return {...state, cartItem: action.cart}
     default:
       return state
   }

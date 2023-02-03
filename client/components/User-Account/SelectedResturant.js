@@ -15,6 +15,7 @@ class SelectedResturant extends React.Component {
   }
 
   async addtoCart(event) {
+    console.log(this.props.cartId)
     let dishId = event.target.id
     await this.props.updateCart({dishId: dishId, cartId: this.props.cartId})
   }

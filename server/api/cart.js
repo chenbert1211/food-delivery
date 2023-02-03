@@ -16,19 +16,21 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.put('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    // console.log(req.body)
-    // const cart = await Cart.findByPk(req.body.cartId)
-    // const dish = await Dish.findByPk(req.body.dishId)
-    // cart.addDish(dish, {quantity: 3})
-    let cart = CartItem.create({
-      cartId: req.body.cartId,
-      dishId: req.body.dishId,
-      quantity: 1
-    })
-
-    res.status(201).send(cart)
+    let cart = await CartItem.findOne({where: {cartId: req.body.cartId}})
+    if (!cart) {
+      CartItem.create({
+        cartId: req.body.cartId,
+        dishId: req.body.dishId,
+        quantity: 1
+      })
+    } else {
+      cart.quantity += 1
+      cart.save()
+    }
+    let allCart = await CartItem.findAll({where: {cartId: req.body.cartId}})
+    res.status(201).send(allCart)
   } catch (err) {
     next(err)
   }
