@@ -9,6 +9,7 @@ import category from './category'
 import dish from './dish'
 import addOns from './addOns'
 import header from './header'
+import cart from './cart'
 
 const reducer = combineReducers({
   user,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   category,
   dish,
   addOns,
-  header
+  header,
+  cart
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

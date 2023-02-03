@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleResturant} from '../../store/resturant'
+import {updateCart, getCart} from '../../store/cart'
 import {Link} from 'react-router-dom'
 
 class SelectedResturant extends React.Component {
@@ -10,11 +11,18 @@ class SelectedResturant extends React.Component {
       resturant: {},
       loading: false
     }
+    this.addtoCart = this.addtoCart.bind(this)
+  }
+
+  async addtoCart(event) {
+    let dishId = event.target.id
+    await this.props.updateCart({dishId: dishId, cartId: this.props.cartId})
   }
 
   async componentDidMount() {
     let id = this.props.match.params.id
     let data = await this.props.getSingleResturant(id)
+    await this.props.getCart(this.props.userId)
     this.setState({
       resturant: data.resturant,
       loading: true
@@ -46,6 +54,7 @@ class SelectedResturant extends React.Component {
                   {cat.dishes.map(b => (
                     <div className="dishes">
                       <img
+                        onClick={this.addtoCart}
                         className="dishImg"
                         id={b.id}
                         src="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMDFkNzMzZDE2MDA3MzJiNWFjMDIyNDljMWZhN2ExNGEvODU5YmFmZjFkNzYwNDJhNDVlMzE5ZDFkZTgwYWVjN2EuanBlZw=="
@@ -64,12 +73,16 @@ class SelectedResturant extends React.Component {
 
 const mapState = state => {
   return {
-    resturant: state.resturant
+    resturant: state.resturant,
+    userId: state.user.id,
+    cartId: state.cart.id
   }
 }
 
 const mapDispatch = dispatch => ({
-  getSingleResturant: id => dispatch(getSingleResturant(id))
+  getSingleResturant: id => dispatch(getSingleResturant(id)),
+  updateCart: rec => dispatch(updateCart(rec)),
+  getCart: id => dispatch(getCart(id))
 })
 
 export default connect(mapState, mapDispatch)(SelectedResturant)
