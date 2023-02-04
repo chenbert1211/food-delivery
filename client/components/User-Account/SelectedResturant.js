@@ -3,21 +3,91 @@ import {connect} from 'react-redux'
 import {getSingleResturant} from '../../store/resturant'
 import {updateCart, getCart} from '../../store/cart'
 import {Link} from 'react-router-dom'
+import ModalUnstyled from '@mui/base/ModalUnstyled'
+import Fade from '@mui/material/Fade'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import {Box, styled} from '@mui/system'
+import Button from '@mui/material/Button'
+
+const BackdropUnstyled = React.forwardRef((props, ref) => {
+  const {open, className, ...other} = props
+  return (
+    <div
+      className={clsx({'MuiBackdrop-open': open}, className)}
+      ref={ref}
+      {...other}
+    />
+  )
+})
+
+BackdropUnstyled.propTypes = {
+  className: PropTypes.string.isRequired,
+  open: PropTypes.bool
+}
+
+const Modal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Backdrop = styled(BackdropUnstyled)`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`
+
+const style = theme => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  backgroundColor: theme.palette.mode === 'dark' ? '#0A1929' : 'white',
+  border: '2px solid currentColor',
+  boxShadow: 24,
+  padding: '16px 32px 24px 32px'
+})
 
 class SelectedResturant extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       resturant: {},
+      addDish: false,
+      dishId: null,
       loading: false
     }
     this.addtoCart = this.addtoCart.bind(this)
+    this.addDish = this.addDish.bind(this)
+    this.closeForm = this.closeForm.bind(this)
   }
 
-  async addtoCart(event) {
-    console.log(this.props.cartId)
-    let dishId = event.target.id
-    await this.props.updateCart({dishId: dishId, cartId: this.props.cartId})
+  addDish() {
+    this.setState({
+      addDish: true,
+      dishId: event.target.id
+    })
+  }
+
+  async addtoCart() {
+    console.log(this.state.dishId, this.props.cartId)
+    await this.props.updateCart({
+      dishId: this.state.dishId,
+      cartId: this.props.cartId
+    })
   }
 
   async componentDidMount() {
@@ -27,6 +97,12 @@ class SelectedResturant extends React.Component {
     this.setState({
       resturant: data.resturant,
       loading: true
+    })
+  }
+
+  closeForm() {
+    this.setState({
+      addDish: false
     })
   }
 
@@ -55,7 +131,7 @@ class SelectedResturant extends React.Component {
                   {cat.dishes.map(b => (
                     <div className="dishes">
                       <img
-                        onClick={this.addtoCart}
+                        onClick={this.addDish}
                         className="dishImg"
                         id={b.id}
                         src="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMDFkNzMzZDE2MDA3MzJiNWFjMDIyNDljMWZhN2ExNGEvODU5YmFmZjFkNzYwNDJhNDVlMzE5ZDFkZTgwYWVjN2EuanBlZw=="
@@ -67,6 +143,21 @@ class SelectedResturant extends React.Component {
               </div>
             ))
           : ''}
+
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={this.state.addDish}
+          onClose={this.closeForm}
+          closeAfterTransition
+          slots={{backdrop: Backdrop}}
+        >
+          <Fade in={this.state.addDish} timeout={300}>
+            <Box sx={style}>
+              <Button onClick={this.addtoCart}>Add Dish</Button>
+            </Box>
+          </Fade>
+        </Modal>
       </div>
     )
   }

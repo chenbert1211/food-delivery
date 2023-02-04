@@ -6,9 +6,8 @@ router.get('/:id', async (req, res, next) => {
   try {
     let id = req.params.id
     const resturant = await Cart.findOne({
-      where: {userId: id}
-      //   ,
-      //   include: [{association: disHea, include: [{association: deaOns}]}]
+      where: {userId: id},
+      include: [Dish]
     })
     res.json(resturant)
   } catch (err) {
@@ -27,9 +26,12 @@ router.post('/', async (req, res, next) => {
       })
     } else {
       cart.quantity += 1
-      cart.save()
+      await cart.save()
     }
-    let allCart = await CartItem.findAll({where: {cartId: req.body.cartId}})
+    let allCart = await Cart.findOne({
+      where: {id: req.body.cartId},
+      include: [Dish]
+    })
     res.status(201).send(allCart)
   } catch (err) {
     next(err)

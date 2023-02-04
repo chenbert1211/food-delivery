@@ -24,12 +24,12 @@ export const updateCart = rec => {
   }
 }
 
-export default function(state = {cart: {}, cartItem: []}, action) {
+export default function(state = {cart: {}}, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
     case UPDATE_CART:
-      return {...state, cartItem: action.cart}
+      return action.cart
     default:
       return state
   }

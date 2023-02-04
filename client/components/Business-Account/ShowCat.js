@@ -104,7 +104,7 @@ class ShowCat extends React.Component {
       addDish: true,
       addHeader: false,
       addAddOns: false,
-      catId: event.target.value
+      catId: event.target.id
     })
   }
 
@@ -153,7 +153,7 @@ class ShowCat extends React.Component {
         {this.props.categories.map(a => (
           <div className="category">
             <h2 className="categoryHeader">{a.name}</h2>
-            <AddIcon onClick={this.addDish} value={a.id} />
+            <AddIcon onClick={this.addDish} id={a.id} />
 
             <div className="dishBox">
               {a.dishes.map(b => (

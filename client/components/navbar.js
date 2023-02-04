@@ -23,7 +23,7 @@ const StyledBadge = styled(Badge)(({theme}) => ({
   }
 }))
 
-const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
+const Navbar = ({handleClick, isLoggedIn, isBusiness, cartQty}) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [anchor, setAnchor] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -38,6 +38,10 @@ const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
     setAnchorEl(null)
     setAnchor(null)
   }
+  let steve = 0
+
+  console.log(!cartQty ? '' : cartQty.map(a => (steve += a.cartItem.quantity)))
+
   return (
     <div>
       <nav className="NavBar">
@@ -45,7 +49,7 @@ const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
         {isLoggedIn ? (
           <div>
             <IconButton aria-label="cart">
-              <StyledBadge badgeContent={4} color="secondary">
+              <StyledBadge badgeContent={steve} color="secondary">
                 <ShoppingCartIcon color="action" />
               </StyledBadge>
             </IconButton>
@@ -127,7 +131,8 @@ const Navbar = ({handleClick, isLoggedIn, isBusiness}) => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    isBusiness: !!state.business.id
+    isBusiness: !!state.business.id,
+    cartQty: state.cart.dishes
   }
 }
 

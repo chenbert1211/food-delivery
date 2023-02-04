@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getResturant, getSingleResturant} from '../store/resturant'
 import {Link} from 'react-router-dom'
+import {getCart} from '../store/cart'
 
 class Resturant extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Resturant extends React.Component {
 
   async componentDidMount() {
     let {resturant} = await this.props.getResturant()
+    await this.props.getCart(this.props.userId)
     this.setState({
       resturants: resturant
     })
@@ -40,13 +42,15 @@ class Resturant extends React.Component {
 
 const mapState = state => {
   return {
-    resturant: state.resturant
+    resturant: state.resturant,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => ({
   getSingleResturant: id => dispatch(getSingleResturant(id)),
-  getResturant: () => dispatch(getResturant())
+  getResturant: () => dispatch(getResturant()),
+  getCart: id => dispatch(getCart(id))
 })
 
 export default connect(mapState, mapDispatch)(Resturant)

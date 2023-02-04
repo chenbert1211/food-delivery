@@ -19,6 +19,8 @@ User.hasOne(Cart)
 Cart.belongsTo(User)
 Cart.belongsToMany(Dish, {through: CartItem})
 
+AddOns.belongsToMany(Cart, {through: CartItem})
+Cart.belongsToMany(AddOns, {through: CartItem})
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
