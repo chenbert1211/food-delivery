@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleResturant} from '../../store/resturant'
 import {updateCart, getCart} from '../../store/cart'
+import {getSingleDish} from '../../store/dish'
 import {Link} from 'react-router-dom'
 import ModalUnstyled from '@mui/base/ModalUnstyled'
 import Fade from '@mui/material/Fade'
@@ -68,17 +69,30 @@ class SelectedResturant extends React.Component {
       resturant: {},
       addDish: false,
       dishId: null,
-      loading: false
+      loading: false,
+      focusDish: false
     }
     this.addtoCart = this.addtoCart.bind(this)
     this.addDish = this.addDish.bind(this)
     this.closeForm = this.closeForm.bind(this)
+    this.addAddOns = this.addAddOns.bind(this)
   }
 
-  addDish() {
+  async addDish(event) {
+    let getDish = await this.props.getSingleDish(event.target.id)
     this.setState({
       addDish: true,
-      dishId: event.target.id
+      dishId: event.target.id,
+      focusDish: getDish.resturant
+    })
+  }
+
+  async addAddOns(event) {
+    console.log(event.target.id)
+    await this.props.updateCart({
+      dishId: this.state.dishId,
+      cartId: this.props.cartId,
+      addOnId: event.target.id
     })
   }
 
@@ -102,12 +116,13 @@ class SelectedResturant extends React.Component {
 
   closeForm() {
     this.setState({
-      addDish: false
+      addDish: false,
+      focusDish: false
     })
   }
 
   render() {
-    let {resturant, loading} = this.state
+    let {resturant, loading, focusDish} = this.state
     return (
       <div className="resturantDiv">
         <div>
@@ -144,20 +159,36 @@ class SelectedResturant extends React.Component {
             ))
           : ''}
 
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={this.state.addDish}
-          onClose={this.closeForm}
-          closeAfterTransition
-          slots={{backdrop: Backdrop}}
-        >
-          <Fade in={this.state.addDish} timeout={300}>
-            <Box sx={style}>
-              <Button onClick={this.addtoCart}>Add Dish</Button>
-            </Box>
-          </Fade>
-        </Modal>
+        {focusDish ? (
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={this.state.addDish}
+            onClose={this.closeForm}
+            closeAfterTransition
+            slots={{backdrop: Backdrop}}
+          >
+            <Fade in={this.state.addDish} timeout={300}>
+              <Box sx={style}>
+                {focusDish.headers.map(head => (
+                  <div>
+                    <h2>{head.name}</h2>
+                    {head.addOns.map(b => (
+                      <div>
+                        <h3 onClick={this.addAddOns} id={b.id}>
+                          {b.name}
+                        </h3>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+                <Button onClick={this.addtoCart}>Add Dish</Button>
+              </Box>
+            </Fade>
+          </Modal>
+        ) : (
+          ''
+        )}
       </div>
     )
   }
@@ -174,7 +205,8 @@ const mapState = state => {
 const mapDispatch = dispatch => ({
   getSingleResturant: id => dispatch(getSingleResturant(id)),
   updateCart: rec => dispatch(updateCart(rec)),
-  getCart: id => dispatch(getCart(id))
+  getCart: id => dispatch(getCart(id)),
+  getSingleDish: id => dispatch(getSingleDish(id))
 })
 
 export default connect(mapState, mapDispatch)(SelectedResturant)

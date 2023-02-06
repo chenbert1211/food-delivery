@@ -30,12 +30,36 @@ async function seed() {
         description: 'yummy in my tummy',
         img: 'no image',
         categories: [
-          {name: 'testestt', dishes: [{name: 'burgers'}]},
-          {name: 'test2'}
+          {
+            name: 'Bugers',
+            dishes: [
+              {
+                name: 'Hamburger',
+                headers: [
+                  {
+                    name: 'Fries',
+                    addOns: [{name: 'small'}, {name: 'medium'}, {name: 'large'}]
+                  }
+                ]
+              },
+              {name: 'CheseBuger'}
+            ]
+          },
+          {name: 'Chicken'}
         ]
       },
       {
-        include: [{association: restCat, include: [{association: catDis}]}]
+        include: [
+          {
+            association: restCat,
+            include: [
+              {
+                association: catDis,
+                include: [{model: Header, include: [{model: AddOns}]}]
+              }
+            ]
+          }
+        ]
       }
     )
   ])

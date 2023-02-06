@@ -14,13 +14,15 @@ const catDis = Category.hasMany(Dish)
 const disHea = Dish.hasMany(Header)
 const deaOns = Header.hasMany(AddOns)
 
-Dish.belongsToMany(Cart, {through: CartItem})
 User.hasOne(Cart)
 Cart.belongsTo(User)
-Cart.belongsToMany(Dish, {through: CartItem})
 
-AddOns.belongsToMany(Cart, {through: CartItem})
-Cart.belongsToMany(AddOns, {through: CartItem})
+Cart.belongsToMany(Dish, {through: CartItem})
+Dish.belongsToMany(Cart, {through: CartItem})
+
+// cartItems to addons???
+// AddOns.belongsToMany(Cart, {through: CartItem})
+// Cart.belongsToMany(AddOns, {through: CartItem})
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
