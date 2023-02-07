@@ -17,8 +17,8 @@ const deaOns = Header.hasMany(AddOns)
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
-Cart.belongsToMany(Dish, {through: CartItem})
-Dish.belongsToMany(Cart, {through: CartItem})
+Cart.belongsToMany(Dish, {through: {model: CartItem, unique: false}})
+Dish.belongsToMany(Cart, {through: {model: CartItem, unique: false}})
 
 // cartItems to addons???
 // AddOns.belongsToMany(Cart, {through: CartItem})
