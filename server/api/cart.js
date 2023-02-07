@@ -17,17 +17,17 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let cart = await CartItem.findOne({where: {cartId: req.body.cartId}})
-    if (!cart) {
-      CartItem.create({
-        cartId: req.body.cartId,
-        dishId: req.body.dishId,
-        quantity: 1
-      })
-    } else {
-      cart.quantity += 1
-      await cart.save()
-    }
+    // let cart = await CartItem.findOne({where: {cartId: req.body.cartId}})
+    // if (!cart) {
+    CartItem.create({
+      cartId: req.body.cartId,
+      dishId: req.body.dishId,
+      quantity: 1
+    })
+    // } else {
+    //   cart.quantity += 1
+    //   await cart.save()
+    // }
     let allCart = await Cart.findOne({
       where: {id: req.body.cartId},
       include: [Dish]
