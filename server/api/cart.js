@@ -17,7 +17,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let cart = await CartItem.findOne({where: {cartId: req.body.cartId}})
+    let cart = await CartItem.findOne({where: {dishId: req.body.dishId}})
     if (!cart) {
       CartItem.create({
         cartId: req.body.cartId,

@@ -48,11 +48,13 @@ const Navbar = ({handleClick, isLoggedIn, isBusiness, cartQty}) => {
         <img id="logo" src="/Logo.png" />
         {isLoggedIn ? (
           <div>
-            <IconButton aria-label="cart">
-              <StyledBadge badgeContent={steve} color="secondary">
-                <ShoppingCartIcon color="action" />
-              </StyledBadge>
-            </IconButton>
+            <Link to="/my-cart">
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={steve} color="secondary">
+                  <ShoppingCartIcon color="action" />
+                </StyledBadge>
+              </IconButton>{' '}
+            </Link>
             <Button
               id="basic"
               aria-controls={open ? 'setting' : undefined}

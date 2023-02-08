@@ -12,7 +12,8 @@ import {
   BusinessLogin,
   BusinessSignup,
   EditResturant,
-  SelectedResturant
+  SelectedResturant,
+  Cart
 } from './components'
 import {me} from './store'
 import {mee} from './store/businessAcc'
@@ -37,10 +38,13 @@ class Routes extends Component {
         <Route path="/resturant/:id" component={SelectedResturant} />
         <Route path="/businessSignup" component={BusinessSignup} />
         <Route path="/businessLogin" component={BusinessLogin} />
+        <Route path="/home" component={Resturant} />
+        <Route path="/resturant/:id" component={SelectedResturant} />
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={Resturant} />
             <Route path="/resturant/:id" component={SelectedResturant} />
+            <Route path="/my-cart" component={Cart} />
           </Switch>
         )}
 
