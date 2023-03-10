@@ -144,7 +144,6 @@ Boilermaker comes with a `.travis.yml` configuration almost ready for
 continuous deployment; follow these steps to the job.
 
 1.  Run the following commands to create a new branch:
-
 ```
 git checkout master
 git pull
