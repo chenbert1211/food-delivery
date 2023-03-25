@@ -203,6 +203,7 @@ using Boilermaker's handy deployment script:
     _ `git checkout -b deploy`: checks out a new branch called
     `deploy`. Note that the name `deploy` here is not magical, but it needs
     to match the name of the branch we specify when we push to our `heroku`
+    
     remote.
     _ `webpack -p`: webpack will run in "production mode"
     _ `git add -f public/bundle.js public/bundle.js.map`: "force" add
