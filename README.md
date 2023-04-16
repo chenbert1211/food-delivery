@@ -25,6 +25,7 @@ git fetch boilermaker
 git merge boilermaker/master
 ```
 
+
 Why did we do that? Because every once in a while, `boilermaker` may
 be updated with additional features or bug fixes, and you can easily
 get those changes from now on by entering:
