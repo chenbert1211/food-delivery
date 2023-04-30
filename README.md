@@ -17,7 +17,6 @@ To use this as boilerplate, you'll need to take the following steps:
   directory on your machine and `git init` (or create an empty repo on
   Github and clone it to your local machine)
 * Run the following commands:
-
 ```
 git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
 git fetch boilermaker
