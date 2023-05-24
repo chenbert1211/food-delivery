@@ -12,7 +12,6 @@ discussion into the code that makes up this repository, see the
 [boilermaker-yt]: https://www.youtube.com/playlist?list=PLx0iOsdUOUmn7D5XL4mRUftn8hvAJGs8H
 ## Setup
 .
-
 To use this as boilerplate, you'll need to take the following steps:
 
 * Don't fork or clone this repo! Instead, create a new, empty
