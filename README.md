@@ -9,7 +9,6 @@ version can serve as a reference, or a starting point. For an in depth
 discussion into the code that makes up this repository, see the
 [Boilermaker Guided Tour][boilermaker-yt]
 
-
 [boilermaker-yt]: https://www.youtube.com/playlist?list=PLx0iOsdUOUmn7D5XL4mRUftn8hvAJGs8H
 ## Setup
 .
